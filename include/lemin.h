@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 16:14:32 by jjourne           #+#    #+#             */
-/*   Updated: 2018/05/01 12:06:09 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/05/12 03:41:33 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,26 @@ typedef enum				e_bool
 	true
 }							t_bool;
 
+typedef struct				s_room
+{
+	int						id;
+	char					*name;
+	t_bool					is_ant;
+	struct s_room			*next;
+}							t_room;
+
 typedef struct				s_lemin
 {
-	int						tmp;
-}							t_filler;
+	int						init;
+	int						nb_ants;
+	struct s_room			*room_begin;
+	struct s_room			*room_end;
+}							t_lemin;
 
 void						exit_error(const char *s);
+void 						init_lemin(t_lemin *lemin, char **line);
+void						init_start_end(t_lemin *lemin, char **line, t_room **room);
+void						init_link(t_lemin *lemin, char **line, t_rom **room);
+void						init_room(t_lemin *lemin, char **line, t_room **room);
 
 #endif
