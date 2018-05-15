@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-void init_lemin(t_lemin *lemin, char **line)
+void init_nb_ant(t_lemin *lemin, char **line)
 {
 	//si line exist
 	//si le 1 caractere n'est pas #
@@ -48,4 +48,18 @@ void init_link(t_lemin *lemin, char **line, t_rom **room)
 void init_room(t_lemin *lemin, char **line, t_room **room)
 {
 
+}
+
+void 	init(t_lemin *lemin, t_room *room, char **line)
+{
+	if(lemin->init == 0) //-- if first time, init lemin
+		init_nb_ant(lemin, line);
+	else if //-- ##, init_startend
+		init_start_end(lemin, line, &room);
+	else if //-- -, init link
+		init_link(lemin, line, &room);
+	else if //-- #, afficher la ligne
+		display_line(lemin, line);
+	else //-- init_room
+		init_room(lemin, line, &room);
 }

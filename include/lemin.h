@@ -31,6 +31,12 @@ typedef enum				e_bool
 	true
 }							t_bool;
 
+typedef struct				s_result
+{
+	int						path;
+	struct s_room			*room;
+}							t_result;
+
 typedef struct				s_room
 {
 	int						id;
@@ -48,9 +54,11 @@ typedef struct				s_lemin
 }							t_lemin;
 
 void						exit_error(const char *s);
-void 						init_lemin(t_lemin *lemin, char **line);
-void						init_start_end(t_lemin *lemin, char **line, t_room **room);
-void						init_link(t_lemin *lemin, char **line, t_rom **room);
+void 						get_nb_ant(t_lemin *lemin, char **line);
+void						get_start_end(t_lemin *lemin, char **line, t_room **room);
+void						get_link(t_lemin *lemin, char **line, t_rom **room);
 void						init_room(t_lemin *lemin, char **line, t_room **room);
+void 						init(t_lemin *lemin, t_room *room, char **line);
+void 						parser(t_lemin *lemin, t_room *room, char **line);
 
 #endif

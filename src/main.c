@@ -19,21 +19,8 @@ void	exit_error(const char *s)
 }
 
 //display_line
-	
 
-void 	main_parser(t_lemin *lemin, t_room *room, char **line)
-{
-	if(lemin->init == 0) //-- if first time, init lemin
-		init_lemin(lemin, line);
-	else if //-- ##, init_startend
-		init_start_end(lemin, line, &room);
-	else if //-- -, init link
-		init_link(lemin, line, &room);
-	else if //-- #, afficher la ligne
-		display_line(lemin, line);
-	else //-- init_room
-		init_room(lemin, line, &room);
-}
+//display_move
 
 int		main(int argc, char *argv[])
 {
@@ -45,12 +32,8 @@ int		main(int argc, char *argv[])
 	if (argc != 1)
 		exit_error("Error: nombre d'arguments incorrecte.");
 	ft_bzero(&lemin, sizeof(lemin));
-	while ((get_next_line(0, &line)) > 0)
-	{
-		main_parser(&lemin, room, line);
-		ft_memdel((void**)line);
-	}
-	//solver
+	parser(&lemin, room, line);
+	// solver(&lemin, room); //pas besoin de la ligne
 	return (0);
 }
 
