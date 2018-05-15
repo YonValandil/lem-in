@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 16:14:32 by jjourne           #+#    #+#             */
-/*   Updated: 2018/05/12 03:41:33 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/05/15 08:54:54 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <stdio.h> //
 
 # define BUF_SIZE 4096
+
+enum { START, END };
 
 typedef enum				e_bool
 {
@@ -54,8 +56,8 @@ typedef struct				s_lemin
 }							t_lemin;
 
 void						exit_error(const char *s);
-void 						get_nb_ant(t_lemin *lemin, char **line);
-void						get_start_end(t_lemin *lemin, char **line, t_room **room);
+void 						get_nb_ants(t_lemin *lemin, char **line);
+t_room						*get_start_end(t_lemin *lemin, char **line, t_room **room);
 void						get_link(t_lemin *lemin, char **line, t_rom **room);
 void						init_room(t_lemin *lemin, char **line, t_room **room);
 void 						init(t_lemin *lemin, t_room *room, char **line);

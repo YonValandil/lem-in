@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 12:02:07 by jjourne           #+#    #+#             */
-/*   Updated: 2018/05/12 07:07:01 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/05/15 09:30:33 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exit_error(const char *s)
 	exit(EXIT_FAILURE);
 }
 
-//display_line
+//display_line (ariake_dark theme)
 
 //display_move
 
@@ -32,6 +32,7 @@ int		main(int argc, char *argv[])
 	if (argc != 1)
 		exit_error("Error: nombre d'arguments incorrecte.");
 	ft_bzero(&lemin, sizeof(lemin));
+	//ini_vars ?????
 	parser(&lemin, room, line);
 	// solver(&lemin, room); //pas besoin de la ligne
 	return (0);
