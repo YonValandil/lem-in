@@ -25,7 +25,8 @@
 
 # define BUF_SIZE 4096
 
-enum { START, END };
+enum { ROOM_NORMAL, ROOM_START, ROOM_END };
+enum { COMMAND_NO, COMMAND_START, COMMAND_END };
 
 typedef enum				e_bool
 {
@@ -44,6 +45,7 @@ typedef struct				s_room
 	int						id;
 	char					*name;
 	t_bool					is_ant;
+	struct s_room			**links;
 	struct s_room			*next;
 }							t_room;
 
@@ -51,15 +53,20 @@ typedef struct				s_lemin
 {
 	int						init;
 	int						nb_ants;
+	int						nb_rooms;
+	int						command;
+	struct s_room			*ptr_tab_link[2];
 	struct s_room			*room_begin;
 	struct s_room			*room_end;
 }							t_lemin;
 
 void						exit_error(const char *s);
 void 						get_nb_ants(t_lemin *lemin, char **line);
-t_room						*get_start_end(t_lemin *lemin, char **line, t_room **room);
+void						*get_command(t_lemin *lemin, char **line,
+	t_room **room, int *room_state);
 void						get_link(t_lemin *lemin, char **line, t_rom **room);
-void						init_room(t_lemin *lemin, char **line, t_room **room);
+t_room						*init_room(t_lemin *lemin, char **line,
+	t_room **room, int room_state);
 void 						init(t_lemin *lemin, t_room *room, char **line);
 void 						parser(t_lemin *lemin, t_room *room, char **line);
 

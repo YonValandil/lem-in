@@ -18,7 +18,9 @@ void	exit_error(const char *s)
 	exit(EXIT_FAILURE);
 }
 
-//display_line (ariake_dark theme)
+//free
+
+//display_line //?
 
 //display_move
 
@@ -37,38 +39,3 @@ int		main(int argc, char *argv[])
 	// solver(&lemin, room); //pas besoin de la ligne
 	return (0);
 }
-
-//------------------------------------------------------------------------------
-//sauvegarder
-	//rooms start / end (externe avec ptr sur room) (en interne, plusieurs type de room)
-	//les chemins
-	//parcourt profondeur/largeur, trouver un chemin, balancer
-
-//-----main.c
-//Main
-	// boucle get_next_line
-		//parsing
-	//le solveur
-
-//FUNC
-	//main_parser
-
-	//init_core
-
-	//init_room
-
-	//init_link
-
-	//init_startend
-
-	//solver
-
-	//parcourt largeur
-
-	//print_move
-
-
-
-// TIPS
-	// ne pas laisser les nom de salle avoir des tirets
-	//interpretation: plusieurs start(error, le dernier?)

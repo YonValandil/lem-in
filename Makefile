@@ -9,7 +9,7 @@ LIBFT =				$(LIBFT_DIR)libft.a
 CFLAGS =			-Wall -Werror -Wextra
 DEBUG_FLAGS =		-fsanitize=address -g
 ARFLAGS =			-rcs
-CFILES =			main parser init
+CFILES =			main parser room
 SRC =				$(CFILES:%=$(SRC_DIR)%.c)
 OBJ =				$(CFILES:%=$(OBJ_DIR)%.o)
 
