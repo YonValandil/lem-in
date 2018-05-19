@@ -19,7 +19,7 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 $(EXEC): $(LIBFT) $(OBJ)
-	$(CC) $(SRC) -I$(HEADER_DIR) -I$(HEADER_LIBFT_DIR) libft/libft.a -o $@ $(CFLAGS) #$(DEBUG_FLAGS)
+	$(CC) $(SRC) -I$(HEADER_DIR) -I$(HEADER_LIBFT_DIR) $(LIBFT) -o $@ $(CFLAGS) #$(DEBUG_FLAGS)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	mkdir -p $(OBJ_DIR)

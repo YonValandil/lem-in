@@ -61,13 +61,12 @@ typedef struct				s_lemin
 }							t_lemin;
 
 void						exit_error(const char *s);
-void 						get_nb_ants(t_lemin *lemin, char **line);
-void						*get_command(t_lemin *lemin, char **line,
-	t_room **room, int *room_state);
-void						get_link(t_lemin *lemin, char **line, t_rom **room);
-t_room						*init_room(t_lemin *lemin, char **line,
-	t_room **room, int room_state);
+void 						get_nb_ants(t_lemin *lemin, char *line);
+void						get_command(t_lemin *lemin, char *line);
+void						get_link(t_lemin *lemin, char *line, t_room **room);
+t_room						*init_room(t_lemin *lemin, char *line,
+	t_room **room);
 void 						init(t_lemin *lemin, t_room *room, char **line);
-void 						parser(t_lemin *lemin, t_room *room, char **line);
+void 						parser(t_lemin *lemin, t_room *room);
 
 #endif

@@ -15,7 +15,7 @@ CFILES =		ft_putchar ft_putchar_fd ft_putstr ft_putstr_fd						\
 				ft_toupper ft_tolower ft_atoi ft_itoa ft_ulltoa_base ft_lltoa_base \
 				ft_strclr ft_striter ft_striteri ft_strnew ft_strdel ft_strequ ft_strnequ ft_strmap ft_strmapi ft_strchr ft_strrchr ft_strsplit\
 				ft_swap ft_range ft_sqrt ft_pow ft_abs\
-				ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter ft_lstmap
+				ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter ft_lstmap get_next_line
 SRC =			$(CFILES:%=$(SRC_DIR)%.c)
 OBJ =			$(SRC:%.c=$(OBJ_DIR)%.o)
 

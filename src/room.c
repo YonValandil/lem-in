@@ -12,33 +12,36 @@
 
 #include "lemin.h"
 
-int	check_room(char *line)
-{
+// int	check_room(char *line)
+// {
 	//test apres le split de init_room
 	//longueur des nb_rooms
 	//coordonnees chiffre
 	//les noms en double
 	//free
 	//autres 'L'
-}
+// }
 
-void link_room(t_lemin *lemin)
+void link_room(t_lemin *lemin) //lst chainee de liens? ou ptr de ptr ?
 {
 	int i;
+	int j;
 	t_room *ptr_room1;
 	t_room *ptr_room2;
 
 	i = 0;
+	j = 0;
 	ptr_room1 = lemin->ptr_tab_link[0];
 	ptr_room2 = lemin->ptr_tab_link[1];
 	while (ptr_room1->links[i] != NULL)
-	{
-
 		++i;
-	}
+	while (ptr_room2->links[j] != NULL)
+		++j;
+	ptr_room1->links[i] = ptr_room2;
+	ptr_room2->links[j] = ptr_room1;
 }
 
-t_room *init_room(t_lemin *lemin, char **line, t_room **room)
+t_room *init_room(t_lemin *lemin, char *line, t_room **room)
 {
 	t_room	*room_tmp;
 	char	**room_data;
@@ -61,6 +64,6 @@ t_room *init_room(t_lemin *lemin, char **line, t_room **room)
 		lemin->command = COMMAND_NO;
 	room_tmp->id = lemin->nb_rooms++;
 	//free split
-	ft_putendl(*line);
+	ft_putendl((const char *)line);
 	return (room_tmp);
 }

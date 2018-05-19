@@ -28,14 +28,14 @@ int		main(int argc, char *argv[])
 {
 	t_lemin		lemin;
 	t_room		*room;
-	char		**line;
 
 	(void)argv;
+	room = NULL;
 	if (argc != 1)
 		exit_error("Error: nombre d'arguments incorrecte.");
 	ft_bzero(&lemin, sizeof(lemin));
 	//ini_vars ?????
-	parser(&lemin, room, line);
+	parser(&lemin, room);
 	// solver(&lemin, room); //pas besoin de la ligne
 	return (0);
 }
