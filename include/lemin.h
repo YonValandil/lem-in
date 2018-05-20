@@ -44,6 +44,8 @@ typedef struct				s_room
 {
 	int						id;
 	char					*name;
+	int						x;
+	int						y;
 	t_bool					is_ant;
 	struct s_room			**links;
 	struct s_room			*next;
@@ -61,6 +63,7 @@ typedef struct				s_lemin
 }							t_lemin;
 
 void						exit_error(const char *s);
+void 						link_room(t_lemin *lemin);
 void 						get_nb_ants(t_lemin *lemin, char *line);
 void						get_command(t_lemin *lemin, char *line);
 void						get_link(t_lemin *lemin, char *line, t_room **room);

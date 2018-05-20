@@ -20,20 +20,35 @@ void get_nb_ants(t_lemin *lemin, char *line)
 	if (lemin->nb_ants <= 0)
 		exit_error("Error: In get_nb_ants() ants not found");
 	lemin->init = 1;
-	ft_putendl("tmp debug nb_ants real :"); //display line?
-	ft_putendl(line); //display line?
-	printf("get_nb_ants done, nb_ants get = %d", lemin->nb_ants);
+	printf("\n----- nb_ants get = %d\n", lemin->nb_ants);
+	ft_putendl(line);
 }
 
 void get_command(t_lemin *lemin, char *line)
 {
-	if (ft_strcmp(line, "##start") == 0)
-		lemin->command = COMMAND_START;
-	else if (ft_strcmp(line, "##end") == 0)
-		lemin->command = COMMAND_END;
-	else
+	if(lemin->init == 0)
+	{
+		printf("\n----- %s : command invalid, ants pas encore init\n", line);
 		return ;
-	ft_putendl(line); //display line?
+	}
+	else if (ft_strcmp(line, "##start") == 0 && lemin->init == 1)
+	{
+		lemin->command = COMMAND_START;
+		printf("\n----- line get start : ");
+
+	}
+	else if (ft_strcmp(line, "##end") == 0 && lemin->init == 1)
+	{
+		lemin->command = COMMAND_END;
+		printf("\n----- line get end : ");
+	}
+	else
+	{
+		printf("\n----- %s : command invalid\n", line);
+		return ;
+	}
+	printf("----- command valid\n");
+	ft_putendl(line);
 }
 
 void get_link(t_lemin *lemin, char *line, t_room **room)
@@ -44,23 +59,26 @@ void get_link(t_lemin *lemin, char *line, t_room **room)
 
 	room_tmp = *room;
 	is_room_exist = 0;
-	if (!(link_data = ft_strsplit(line, '-')) && !(link_data[0]) && !(link_data[1]))
+	if (!(link_data = ft_strsplit(line, '-')))
 		exit_error("Error: In get_link() ft_strsplit de link_data");
+	if ((link_data[0] == NULL) || (link_data[1] == NULL) || (link_data[2] != NULL))
+		exit_error("Error: In get_link() Parse error");
+	printf("\n----- split values: \nlink_data[0] = %s\nlink_data[1] = %s\nlink_data[2] = %s\n", link_data[0], link_data[1], link_data[2]);
+	printf("----- parcourt room:\n");
 	while (room_tmp != NULL)
 	{
 		if ((ft_strcmp(link_data[0], room_tmp->name) == 0) && ++is_room_exist)
 			lemin->ptr_tab_link[0] = room_tmp;
-		if ((ft_strcmp(link_data[1], room_tmp->name) == 0) && ++is_room_exist)
+		else if ((ft_strcmp(link_data[1], room_tmp->name) == 0) && ++is_room_exist)
 			lemin->ptr_tab_link[1] = room_tmp;
+		printf("->%s", room_tmp->name);
 		room_tmp = room_tmp->next;
 	}
+	printf("\n");
 	if (is_room_exist == 2)
-		// link_room(lemin);
-		exit_error("connection des deux room. pas encore de link_room()");
+		link_room(lemin); //putendl?
 	else
 		exit_error("pas encore de solver, get_link() faux"); // solver();
-	ft_putendl(line);
-	//init_link?
 }
 
 void 	parser(t_lemin *lemin, t_room *room)
@@ -71,9 +89,9 @@ void 	parser(t_lemin *lemin, t_room *room)
 	{
 		if(lemin->init == 0 && line[0] != '#')
 			get_nb_ants(lemin, line);
-		else if (lemin->init == 1 && line[0] == '#' && line[1] == '#')
+		else if (line[0] == '#' && line[1] == '#')
 			get_command(lemin, line);
-		else if (*line == '#')
+		else if (line[0] == '#')
 			ft_putendl(line);
 		else if (ft_strchr(line, '-'))
 			get_link(lemin, line, &room);
