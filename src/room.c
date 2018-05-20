@@ -12,7 +12,7 @@
 
 #include "lemin.h"
 
-char	**check_room(char *line, t_room *room)
+char	**check_init_room(char *line, t_room *room)
 {
 	int i;
 	t_room *room_i;
@@ -39,46 +39,46 @@ char	**check_room(char *line, t_room *room)
 	return (room_data);
 }
 
-void check_link_room(t_lemin *lemin, t_room *room)
+int check_link_room(t_lemin *lemin, t_room *room)
 {
-	
+	int i;
+	int k;
+
+	i = 0;
+	if (!(room->links))
+		if (!(room->links = (t_room**)ft_memalloc(sizeof(t_room*) * (lemin->nb_rooms))))
+			exit(EXIT_FAILURE);
+	while (room->links[i] != NULL)
+	{
+		k = 0;
+		printf("\n-----new boucle k\n");
+		while (k < i)
+		{
+			printf("room[i:%d]->name = %s | room[k:%d]->name = %s\n", i, room->links[i]->name, k, room->links[k]->name);
+			if (room->links[i]->id == room->links[k]->id)
+				exit_error("In link_room() : Parse error -> multiple same links");
+			++k;
+		}
+		++i;
+	}
+	return (i);
 }
 
 void link_room(t_lemin *lemin)
 {
 	int i;
 	int j;
-	int k;
 	t_room *ptr_room1;
 	t_room *ptr_room2;
 
-	i = -1;
-	j = -1;
 	ptr_room1 = lemin->ptr_tab_link[0];
 	ptr_room2 = lemin->ptr_tab_link[1];
-	if (!(ptr_room1->links))
-		if (!(ptr_room1->links = (t_room**)ft_memalloc(sizeof(t_room*) * (lemin->nb_rooms))))
-			exit(EXIT_FAILURE);
-	if (!(ptr_room2->links))
-		if (!(ptr_room2->links = (t_room**)ft_memalloc(sizeof(t_room*) * (lemin->nb_rooms))))
-			exit(EXIT_FAILURE);
-	while (ptr_room1->links[++i] != NULL)
-	{
-		k = -1;
-		while (++k < i)
-			if (ptr_room1->links[i]->id == ptr_room1->links[k]->id)
-				exit_error("In link_room() : Parse error -> multiple same links");
-	}
-	while (ptr_room2->links[++j] != NULL)
-	{
-		k = -1;
-		while (++k < j)
-			if (ptr_room2->links[j]->id == ptr_room2->links[k]->id)
-				exit_error("In link_room() : Parse error -> multiple same links");
-	}
+	printf("\n-----check_link_room:\n room2 name = %s | room1 name = %s\n", ptr_room2->name, ptr_room1->name);
+	i = check_link_room(lemin, ptr_room1);
 	ptr_room1->links[i] = ptr_room2;
+	j = check_link_room(lemin, ptr_room2);
 	ptr_room2->links[j] = ptr_room1;
-	printf("\n----- [%s]-[%s]\n", ptr_room2->links[j]->name, ptr_room1->links[i]->name);
+	printf("\n-----lien: [%s]-[%s]\n", ptr_room2->links[j]->name, ptr_room1->links[i]->name);
 }
 
 t_room *init_room(t_lemin *lemin, char *line, t_room **room)
@@ -89,7 +89,7 @@ t_room *init_room(t_lemin *lemin, char *line, t_room **room)
 	room_new = *room;
 	if (!(room_new = (t_room*)ft_memalloc(sizeof(t_room))))
 		exit(EXIT_FAILURE);
-	room_data = check_room(line, *room);
+	room_data = check_init_room(line, *room);
 	room_new->id = lemin->nb_rooms++;
 	room_new->name = ft_strdup(room_data[0]); //free
 	room_new->x = ft_atoi(room_data[1]);

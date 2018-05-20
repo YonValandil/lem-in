@@ -63,6 +63,8 @@ typedef struct				s_lemin
 }							t_lemin;
 
 void						exit_error(const char *s);
+char						**check_init_room(char *line, t_room *room);
+int 						check_link_room(t_lemin *lemin, t_room *room);
 void 						link_room(t_lemin *lemin);
 void 						get_nb_ants(t_lemin *lemin, char *line);
 void						get_command(t_lemin *lemin, char *line);
