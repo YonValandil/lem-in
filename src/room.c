@@ -46,15 +46,14 @@ int check_link_room(t_lemin *lemin, t_room *room)
 
 	i = 0;
 	if (!(room->links))
-		if (!(room->links = (t_room**)ft_memalloc(sizeof(t_room*) * (lemin->nb_rooms))))
+		if (!(room->links = (t_room**)ft_memalloc(sizeof(t_room*)
+			* (lemin->nb_rooms))))
 			exit(EXIT_FAILURE);
 	while (room->links[i] != NULL)
 	{
 		k = 0;
-		printf("\n-----new boucle k\n");
 		while (k < i)
 		{
-			printf("room[i:%d]->name = %s | room[k:%d]->name = %s\n", i, room->links[i]->name, k, room->links[k]->name);
 			if (room->links[i]->id == room->links[k]->id)
 				exit_error("In link_room() : Parse error -> multiple same links");
 			++k;
@@ -73,12 +72,13 @@ void link_room(t_lemin *lemin)
 
 	ptr_room1 = lemin->ptr_tab_link[0];
 	ptr_room2 = lemin->ptr_tab_link[1];
-	printf("\n-----check_link_room:\n room2 name = %s | room1 name = %s\n", ptr_room2->name, ptr_room1->name);
 	i = check_link_room(lemin, ptr_room1);
 	ptr_room1->links[i] = ptr_room2;
+	check_link_room(lemin, ptr_room1);
 	j = check_link_room(lemin, ptr_room2);
 	ptr_room2->links[j] = ptr_room1;
-	printf("\n-----lien: [%s]-[%s]\n", ptr_room2->links[j]->name, ptr_room1->links[i]->name);
+	check_link_room(lemin, ptr_room2);
+	printf("\n-----lien: [%s]-[%s]\n", ptr_room2->links[j]->name, ptr_room1->links[i]->name);//
 }
 
 t_room *init_room(t_lemin *lemin, char *line, t_room **room)
