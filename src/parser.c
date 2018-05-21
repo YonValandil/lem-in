@@ -21,7 +21,8 @@ void get_nb_ants(t_lemin *lemin, char *line)
 		exit_error("Error: In get_nb_ants() ants not found");
 	lemin->init = 1;
 	printf("\n----- nb_ants get = %d\n", lemin->nb_ants);
-	ft_putendl(line);
+	// ft_putendl(line);
+	lemin->displayline = display_line(lemin->displayline, line);//
 }
 
 void get_command(t_lemin *lemin, char *line)
@@ -48,7 +49,8 @@ void get_command(t_lemin *lemin, char *line)
 		return ;
 	}
 	printf("----- command valid\n");
-	ft_putendl(line);
+	// ft_putendl(line);
+	lemin->displayline = display_line(lemin->displayline, line);//
 }
 
 void get_link(t_lemin *lemin, char *line, t_room **room)
@@ -63,7 +65,6 @@ void get_link(t_lemin *lemin, char *line, t_room **room)
 		exit_error("Error: In get_link() ft_strsplit de link_data");
 	if ((link_data[0] == NULL) || (link_data[1] == NULL) || (link_data[2] != NULL))
 		exit_error("Error: In get_link() Parse error");
-	printf("\n----- split values: \nlink_data[0] = %s\nlink_data[1] = %s\nlink_data[2] = %s\n", link_data[0], link_data[1], link_data[2]);
 	printf("----- parcourt room:\n");
 	while (room_tmp != NULL)
 	{
@@ -76,12 +77,19 @@ void get_link(t_lemin *lemin, char *line, t_room **room)
 	}
 	printf("\n");
 	if (is_room_exist == 2)
+	{
+		// lemin->displayline = display_line(lemin->displayline, line);//
 		link_room(lemin); //putendl?
+	}
 	else
-		exit_error("pas encore de solver, get_link() faux"); // solver();
+	{
+		printf("\nsolver vient de => get_link (mauvais lien)\n");
+		solver(lemin, *room);
+	}
+	lemin->displayline = display_line(lemin->displayline, line);//
 }
 
-void 	parser(t_lemin *lemin, t_room *room)
+t_room 	*parser(t_lemin *lemin, t_room *room)
 {
 	char *line;
 
@@ -92,11 +100,13 @@ void 	parser(t_lemin *lemin, t_room *room)
 		else if (line[0] == '#' && line[1] == '#')
 			get_command(lemin, line);
 		else if (line[0] == '#')
-			ft_putendl(line);
+			// ft_putendl(line);
+			lemin->displayline = display_line(lemin->displayline, line);
 		else if (ft_strchr(line, '-'))
 			get_link(lemin, line, &room);
 		else
 			room = init_room(lemin, line, &room);
 		ft_memdel((void**)&line);
 	}
+	return (room);
 }

@@ -32,8 +32,8 @@ int		main(int argc, char *argv[])
 	if (argc != 1)
 		exit_error("Error: nombre d'arguments incorrecte.");
 	ft_bzero(&lemin, sizeof(lemin));
-	//ini_vars ?????
-	parser(&lemin, room);
-	// solver(&lemin, room); //pas besoin de la ligne
+	room = parser(&lemin, room);
+	printf("\nsolver() => vient du main (parsing ok)\n");
+	solver(&lemin, room);
 	return (0);
 }

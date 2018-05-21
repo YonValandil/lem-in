@@ -46,6 +46,10 @@ typedef struct				s_room
 	char					*name;
 	int						x;
 	int						y;
+	int						dist;//
+	int						path;//
+	int						ant;//
+	char					*source;//
 	t_bool					is_ant;
 	struct s_room			**links;
 	struct s_room			*next;
@@ -57,13 +61,20 @@ typedef struct				s_lemin
 	int						nb_ants;
 	int						nb_rooms;
 	int						command;
+	int						antnum;//
+	int						ants_start;//
+	int						ants_end;//
+	int						paths;//
+	int						sizepath;//
+	char					*displayline;//
 	struct s_room			*ptr_tab_link[2];
 	struct s_room			*room_begin;
 	struct s_room			*room_end;
 }							t_lemin;
 
 void						exit_error(const char *s);
-char						**check_init_room(char *line, t_room *room);
+char						**check_init_room(t_lemin *lemin, char *line,
+	t_room *room);
 int 						check_link_room(t_lemin *lemin, t_room *room);
 void 						link_room(t_lemin *lemin);
 void 						get_nb_ants(t_lemin *lemin, char *line);
@@ -72,6 +83,20 @@ void						get_link(t_lemin *lemin, char *line, t_room **room);
 t_room						*init_room(t_lemin *lemin, char *line,
 	t_room **room);
 void 						init(t_lemin *lemin, t_room *room, char **line);
-void 						parser(t_lemin *lemin, t_room *room);
+t_room 						*parser(t_lemin *lemin, t_room *room);
+void 						solver(t_lemin *lemin, t_room *first_room);
+
+
+int		maxpath(t_lemin *core);
+int		checkpath(t_lemin *core, t_room *room, int dist);
+void	pathnumber(t_lemin *core, t_room *begin);
+t_room	*findplace(t_room *from, int path);
+void	moovefromstart(t_lemin *core);
+void	moovefromrooms(t_lemin *core, t_room *begin);
+void	mooveants(t_lemin *core, t_room *begin);
+void	putdist(t_room *room, int dist);
+void	cleardist(t_room *begin);
+void	printmoove(t_lemin *core, t_room *dest, int ant);
+char	*display_line(char *display, char *str);
 
 #endif
