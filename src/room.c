@@ -98,6 +98,7 @@ t_room *init_room(t_lemin *lemin, char *line, t_room **room)
 	room_new->name = ft_strdup(room_data[0]); //free
 	room_new->x = ft_atoi(room_data[1]);
 	room_new->y = ft_atoi(room_data[2]);
+	room_new->ant = 0;
 	room_new->links = NULL;
 	room_new->source = NULL;
 	room_new->dist = -1;

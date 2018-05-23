@@ -20,8 +20,6 @@ void	exit_error(const char *s)
 
 //free
 
-//display_move
-
 int		main(int argc, char *argv[])
 {
 	t_lemin		lemin;

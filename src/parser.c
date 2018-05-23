@@ -1,5 +1,19 @@
 #include "lemin.h"
 
+void	init_vars(t_lemin *core, char *line)
+{
+	core->ants_start = core->nb_ants;
+	core->ants_end = 0;
+	// core->init = 1;
+	// core->initlinks = 0;
+	// core->i = 1;
+	core->antnum = 1;
+	core->room_begin = NULL;
+	core->room_end = NULL;
+	core->sizepath = 0;
+	core->displayline = display_line(core->displayline, line);
+}
+
 void get_nb_ants(t_lemin *lemin, char *line)
 {
 	int i;
@@ -21,8 +35,9 @@ void get_nb_ants(t_lemin *lemin, char *line)
 		exit_error("Error: In get_nb_ants() ants not found");
 	lemin->init = 1;
 	printf("\n----- nb_ants get = %d\n", lemin->nb_ants);
+	init_vars(lemin, line);
 	// ft_putendl(line);
-	lemin->displayline = display_line(lemin->displayline, line);//
+	// lemin->displayline = display_line(lemin->displayline, line);//
 }
 
 void get_command(t_lemin *lemin, char *line)

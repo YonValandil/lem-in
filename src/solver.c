@@ -120,6 +120,7 @@ void	moovefromrooms(t_lemin *core, t_room *begin)
 	t_room	*dest;
 
 	a = 1;
+	// printf("\nb_ants = %d\nants_start = %d\nants_end = %d\n\n", core->nb_ants, core->ants_start, core->ants_end);
 	while (a <= ((core->nb_ants - core->ants_start) + core->ants_end))
 	{
 		room = begin;
@@ -147,6 +148,7 @@ void	mooveants(t_lemin *core, t_room *begin)
 	core->room_begin->path = 0;
 	while (core->ants_end != core->nb_ants)
 	{
+		// printf("test apres fromroom\nants_end = %d\nnb_ants = %d", core->ants_end, core->nb_ants);
 		moovefromrooms(core, begin);
 		moovefromstart(core);
 	}
@@ -257,7 +259,6 @@ void solver(t_lemin *lemin, t_room *first_room)
 	// free(lemin->displayline);
 	pathnumber(lemin, first_room);
 	mooveants(lemin, first_room);
-	printf("test/////////////////////////////////////////\n");
 	// free_list(first_room);
 	exit(1);
 }

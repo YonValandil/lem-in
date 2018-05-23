@@ -98,5 +98,6 @@ void	putdist(t_room *room, int dist);
 void	cleardist(t_room *begin);
 void	printmoove(t_lemin *core, t_room *dest, int ant);
 char	*display_line(char *display, char *str);
+void	init_vars(t_lemin *core, char *line);
 
 #endif
