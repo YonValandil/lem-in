@@ -18,7 +18,23 @@ void	exit_error(const char *s)
 	exit(EXIT_FAILURE);
 }
 
-//free
+//free lemin (split)
+//
+
+void	free_list(t_room *begin)
+{
+	t_room	*tmp;
+
+	while (begin)
+	{
+		free(begin->source);
+		free(begin->name);
+		free(begin->links);
+		tmp = begin;
+		begin = begin->next;
+		free(tmp);
+	}
+}
 
 int		main(int argc, char *argv[])
 {

@@ -21,10 +21,7 @@ char	**check_init_room(t_lemin *lemin, char *line, t_room *room)
 	i = 0;
 	room_i = room;
 	if (*line == 'L')
-	{
-		printf("\nsolver vient de => check_init_room (L found)\n");
 		solver(lemin, room);
-	}
 	if (!(room_data = ft_strsplit(line, ' ')))
 		exit_error("Error: In init_room() ft_strsplit de room_data");
 	while (room_data[i] != NULL)
@@ -81,7 +78,6 @@ void link_room(t_lemin *lemin)
 	j = check_link_room(lemin, ptr_room2);
 	ptr_room2->links[j] = ptr_room1;
 	check_link_room(lemin, ptr_room2);
-	printf("\n-----lien: [%s]-[%s]\n", ptr_room2->links[j]->name, ptr_room1->links[i]->name);//
 }
 
 t_room *init_room(t_lemin *lemin, char *line, t_room **room)
@@ -93,7 +89,6 @@ t_room *init_room(t_lemin *lemin, char *line, t_room **room)
 	if (!(room_new = (t_room*)ft_memalloc(sizeof(t_room))))
 		exit(EXIT_FAILURE);
 	room_data = check_init_room(lemin, line, *room);
-	// room_new->id = lemin->nb_rooms++;
 	room_new->id = lemin->nb_rooms++;
 	room_new->name = ft_strdup(room_data[0]); //free
 	room_new->x = ft_atoi(room_data[1]);
@@ -104,19 +99,12 @@ t_room *init_room(t_lemin *lemin, char *line, t_room **room)
 	room_new->dist = -1;
 	room_new->next = *room;
 	if (lemin->command == COMMAND_START)
-	{
 		lemin->room_begin = room_new;
-		printf("\n-----room start: %s\n", room_new->name);
-	}
 	else if (lemin->command == COMMAND_END)
-	{
 		lemin->room_end = room_new;
-		printf("\n-----room end: %s\n", room_new->name);
-	}
 	if (lemin->command == COMMAND_END || lemin->command == COMMAND_START)
 		lemin->command = COMMAND_NO;
 	//free et free split
-	// ft_putendl((const char *)line);
 	lemin->displayline = display_line(lemin->displayline, line);
 	return (room_new);
 }

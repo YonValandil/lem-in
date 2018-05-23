@@ -85,8 +85,6 @@ t_room						*init_room(t_lemin *lemin, char *line,
 void 						init(t_lemin *lemin, t_room *room, char **line);
 t_room 						*parser(t_lemin *lemin, t_room *room);
 void 						solver(t_lemin *lemin, t_room *first_room);
-
-
 int		maxpath(t_lemin *core);
 int		checkpath(t_lemin *core, t_room *room, int dist);
 void	pathnumber(t_lemin *core, t_room *begin);
@@ -99,5 +97,6 @@ void	cleardist(t_room *begin);
 void	printmoove(t_lemin *core, t_room *dest, int ant);
 char	*display_line(char *display, char *str);
 void	init_vars(t_lemin *core, char *line);
+void	free_list(t_room *begin);
 
 #endif
