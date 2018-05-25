@@ -21,6 +21,11 @@ void	exit_error(const char *s)
 //free lemin (split)
 //
 
+//antnum ?
+//putdist ?
+//findplace ?
+//pathnumber?
+
 void	free_list(t_room *begin)
 {
 	t_room	*tmp;
@@ -47,7 +52,6 @@ int		main(int argc, char *argv[])
 		exit_error("Error: nombre d'arguments incorrecte.");
 	ft_bzero(&lemin, sizeof(lemin));
 	room = parser(&lemin, room);
-	printf("\nsolver() => vient du main (parsing ok)\n");
 	solver(&lemin, room);
 	return (0);
 }

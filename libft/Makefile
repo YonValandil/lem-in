@@ -1,7 +1,9 @@
 CC =			gcc
 NAME =			libft.a
 SRC_DIR =		./
+# SRC_DIR_PRINTF =./ft_printf/
 OBJ_DIR =		./obj/
+# OBJ_DIR_PRINTF =./obj/ft_printf/
 HEADER =		./include
 CFLAGS =		-Wall -Werror -Wextra
 DEBUG_FLAGS =	-fsanitize=address -g
@@ -15,9 +17,13 @@ CFILES =		ft_putchar ft_putchar_fd ft_putstr ft_putstr_fd						\
 				ft_toupper ft_tolower ft_atoi ft_itoa ft_ulltoa_base ft_lltoa_base \
 				ft_strclr ft_striter ft_striteri ft_strnew ft_strdel ft_strequ ft_strnequ ft_strmap ft_strmapi ft_strchr ft_strrchr ft_strsplit\
 				ft_swap ft_range ft_sqrt ft_pow ft_abs\
-				ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter ft_lstmap get_next_line
+				ft_lstnew ft_lstdelone ft_lstdel ft_lstadd ft_lstiter ft_lstmap get_next_line \
+				apply ft_printf modifier ft_printf_parser spec_conv spec_decimal spec_type spec_unicode
+
 SRC =			$(CFILES:%=$(SRC_DIR)%.c)
+# SRC_PRINTF =	$(CFILES_PRINTF:%=$(SRC_DIR_PRINTF)%.c)
 OBJ =			$(SRC:%.c=$(OBJ_DIR)%.o)
+# OBJ_PRINTF =	$(SRC_PRINTF:%.c=$(OBJ_DIR_PRINTF)%.o)
 
 all: $(NAME)
 
@@ -28,6 +34,10 @@ $(NAME): $(OBJ)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) -c $< -I$(HEADER) -o $@ $(CFLAGS)
+
+# $(OBJ_DIR)%.o: $(SRC_DIR_PRINTF)%.c
+	# mkdir -p $(OBJ_DIR)
+	# $(CC) -c $< -I$(HEADER) -o $@ $(CFLAGS)
 
 clean:
 	rm -rf $(OBJ_DIR)

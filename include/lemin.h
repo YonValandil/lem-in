@@ -20,6 +20,7 @@
 # include <limits.h>
 # include "../libft/include/libft.h"
 # include "../libft/include/get_next_line.h"
+# include "../libft/include/ft_printf.h"
 
 # include <stdio.h> //
 
@@ -27,18 +28,6 @@
 
 enum { ROOM_NORMAL, ROOM_START, ROOM_END };
 enum { COMMAND_NO, COMMAND_START, COMMAND_END };
-
-typedef enum				e_bool
-{
-	false = 0,
-	true
-}							t_bool;
-
-typedef struct				s_result
-{
-	int						path;
-	struct s_room			*room;
-}							t_result;
 
 typedef struct				s_room
 {

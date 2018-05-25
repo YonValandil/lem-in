@@ -70,7 +70,7 @@ void solver(t_lemin *lemin, t_room *first_room)
 	putdist(lemin->room_end, 1);
 	if (lemin->room_begin->dist == -1)
 		exit_error("In solver() : room_begin->dist == -1");
-	printf("%s\n", lemin->displayline);//
+	ft_printf("%s\n", lemin->displayline);//
 	free(lemin->displayline);
 	pathnumber(lemin, first_room);
 	mooveants(lemin, first_room);
