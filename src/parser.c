@@ -1,16 +1,5 @@
 #include "lemin.h"
 
-void	init_vars(t_lemin *core, char *line)
-{
-	core->ants_start = core->nb_ants;
-	core->ants_end = 0;
-	core->antnum = 1;
-	core->room_begin = NULL;
-	core->room_end = NULL;
-	core->sizepath = 0;
-	core->displayline = display_line(core->displayline, line);
-}
-
 void get_nb_ants(t_lemin *lemin, char *line)
 {
 	int i;
@@ -31,7 +20,8 @@ void get_nb_ants(t_lemin *lemin, char *line)
 	if (lemin->nb_ants <= 0)
 		exit_error("Error: In get_nb_ants() ants not found");
 	lemin->init = 1;
-	init_vars(lemin, line);
+	lemin->antnum = 1;
+	lemin->ants_start = lemin->nb_ants;
 }
 
 void get_command(t_lemin *lemin, char *line)
@@ -44,14 +34,14 @@ void get_command(t_lemin *lemin, char *line)
 		lemin->command = COMMAND_END;
 	else
 		return ;
-	lemin->displayline = display_line(lemin->displayline, line);//
+	ft_putendl(line);
 }
 
 void get_link(t_lemin *lemin, char *line, t_room **room)
 {
 	int		is_room_exist;
 	t_room	*room_tmp;
-	char 	**link_data; //free split
+	char 	**link_data;
 
 	room_tmp = *room;
 	is_room_exist = 0;
@@ -67,11 +57,12 @@ void get_link(t_lemin *lemin, char *line, t_room **room)
 			lemin->ptr_tab_link[1] = room_tmp;
 		room_tmp = room_tmp->next;
 	}
+	free_link(link_data);
 	if (is_room_exist == 2)
 		link_room(lemin);
 	else
 		solver(lemin, *room);
-	lemin->displayline = display_line(lemin->displayline, line);
+	ft_putendl(line);
 }
 
 t_room 	*parser(t_lemin *lemin, t_room *room)
@@ -85,7 +76,7 @@ t_room 	*parser(t_lemin *lemin, t_room *room)
 		else if (line[0] == '#' && line[1] == '#')
 			get_command(lemin, line);
 		else if (line[0] == '#')
-			lemin->displayline = display_line(lemin->displayline, line);
+			ft_putendl(line);
 		else if (ft_strchr(line, '-'))
 			get_link(lemin, line, &room);
 		else

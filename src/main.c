@@ -18,13 +18,20 @@ void	exit_error(const char *s)
 	exit(EXIT_FAILURE);
 }
 
-//free lemin (split)
-//
+void	free_room(char **split)
+{
+	ft_memdel((void**)&split[0]);
+	ft_memdel((void**)&split[1]);
+	ft_memdel((void**)&split[2]);
+	ft_memdel((void**)&split);
+}
 
-//antnum ?
-//putdist ?
-//findplace ?
-//pathnumber?
+void	free_link(char **split)
+{
+	ft_memdel((void**)&split[0]);
+	ft_memdel((void**)&split[1]);
+	ft_memdel((void**)&split);
+}
 
 void	free_list(t_room *begin)
 {
@@ -40,6 +47,11 @@ void	free_list(t_room *begin)
 		free(tmp);
 	}
 }
+
+//antnum ?
+//putdist ?
+//findplace ?
+//pathnumber?
 
 int		main(int argc, char *argv[])
 {

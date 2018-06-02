@@ -1,5 +1,19 @@
 #include "lemin.h"
 
+void	printmoove(t_lemin *lemin, t_room *dest, int ant)
+{
+	if (dest->id == lemin->room_end->id)
+		lemin->ants_end++;
+	if (!ant)
+	{
+		dest->ant = lemin->antnum;
+		lemin->antnum++;
+	}
+	else
+		dest->ant = ant;
+	ft_printf("L%d-%s", dest->ant, dest->name);
+}
+
 void	moovefromstart(t_lemin *lemin)
 {
 	int		path;

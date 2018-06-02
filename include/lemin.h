@@ -35,10 +35,10 @@ typedef struct				s_room
 	char					*name;
 	int						x;
 	int						y;
-	int						dist;//
-	int						path;//
-	int						ant;//
-	char					*source;//
+	int						dist;
+	int						path;
+	int						ant;
+	char					*source;
 	t_bool					is_ant;
 	struct s_room			**links;
 	struct s_room			*next;
@@ -50,12 +50,12 @@ typedef struct				s_lemin
 	int						nb_ants;
 	int						nb_rooms;
 	int						command;
-	int						antnum;//
-	int						ants_start;//
-	int						ants_end;//
-	int						paths;//
-	int						sizepath;//
-	char					*displayline;//
+	int						antnum;
+	int						ants_start;
+	int						ants_end;
+	int						paths;
+	int						sizepath;
+	char					*displayline;
 	struct s_room			*ptr_tab_link[2];
 	struct s_room			*room_begin;
 	struct s_room			*room_end;
@@ -74,18 +74,19 @@ t_room						*init_room(t_lemin *lemin, char *line,
 void 						init(t_lemin *lemin, t_room *room, char **line);
 t_room 						*parser(t_lemin *lemin, t_room *room);
 void 						solver(t_lemin *lemin, t_room *first_room);
-int		maxpath(t_lemin *core);
-int		checkpath(t_lemin *core, t_room *room, int dist);
-void	pathnumber(t_lemin *core, t_room *begin);
-t_room	*findplace(t_room *from, int path);
-void	moovefromstart(t_lemin *core);
-void	moovefromrooms(t_lemin *core, t_room *begin);
-void	mooveants(t_lemin *core, t_room *begin);
-void	putdist(t_room *room, int dist);
-void	cleardist(t_room *begin);
-void	printmoove(t_lemin *core, t_room *dest, int ant);
-char	*display_line(char *display, char *str);
-void	init_vars(t_lemin *core, char *line);
-void	free_list(t_room *begin);
+void						free_room(char **split);
+void						free_link(char **lemin);
+
+int							maxpath(t_lemin *core);
+int							checkpath(t_lemin *core, t_room *room, int dist);
+void						pathnumber(t_lemin *core, t_room *begin);
+t_room						*findplace(t_room *from, int path);
+void						moovefromstart(t_lemin *core);
+void 						moovefromrooms(t_lemin *core, t_room *begin);
+void						mooveants(t_lemin *core, t_room *begin);
+void						putdist(t_room *room, int dist);
+void						cleardist(t_room *begin);
+void						printmoove(t_lemin *core, t_room *dest, int ant);
+void						free_list(t_room *begin);
 
 #endif
