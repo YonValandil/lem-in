@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solver.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjourne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/04 00:47:02 by jjourne           #+#    #+#             */
+/*   Updated: 2018/06/04 00:57:08 by jjourne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
 void	putdist(t_room *room, int dist)
@@ -61,7 +73,7 @@ t_room	*findplace(t_room *from, int path)
 	return (dest);
 }
 
-void solver(t_lemin *lemin, t_room *first_room)
+void	solver(t_lemin *lemin, t_room *first_room)
 {
 	if (!lemin->room_begin || !lemin->room_end || !first_room)
 		exit_error("In solver() : Impossible to start solver");

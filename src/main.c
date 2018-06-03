@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 12:02:07 by jjourne           #+#    #+#             */
-/*   Updated: 2018/05/15 09:30:33 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/06/04 00:46:18 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ void	free_list(t_room *begin)
 		free(tmp);
 	}
 }
-
-//antnum ?
-//putdist ?
-//findplace ?
-//pathnumber?
 
 int		main(int argc, char *argv[])
 {

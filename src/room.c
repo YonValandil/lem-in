@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   room.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 03:25:21 by jjourne           #+#    #+#             */
-/*   Updated: 2018/05/12 07:06:47 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/06/04 01:06:36 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	**check_init_room(t_lemin *lemin, char *line, t_room *room)
 {
-	int i;
-	t_room *room_i;
-	char **room_data;
+	int		i;
+	t_room	*room_i;
+	char	**room_data;
 
 	i = 0;
 	room_i = room;
@@ -39,10 +39,10 @@ char	**check_init_room(t_lemin *lemin, char *line, t_room *room)
 	return (room_data);
 }
 
-int check_link_room(t_lemin *lemin, t_room *room)
+int		check_link_room(t_lemin *lemin, t_room *room)
 {
-	int i;
-	int k;
+	int	i;
+	int	k;
 
 	i = 0;
 	if (!(room->links))
@@ -55,7 +55,7 @@ int check_link_room(t_lemin *lemin, t_room *room)
 		while (k < i)
 		{
 			if (room->links[i]->id == room->links[k]->id)
-				exit_error("In link_room() : Parse error -> multiple same links");
+				exit_error("In link_room(): Parse error > multiple same links");
 			++k;
 		}
 		++i;
@@ -63,12 +63,12 @@ int check_link_room(t_lemin *lemin, t_room *room)
 	return (i);
 }
 
-void link_room(t_lemin *lemin)
+void	link_room(t_lemin *lemin)
 {
-	int i;
-	int j;
-	t_room *ptr_room1;
-	t_room *ptr_room2;
+	int		i;
+	int		j;
+	t_room	*ptr_room1;
+	t_room	*ptr_room2;
 
 	ptr_room1 = lemin->ptr_tab_link[0];
 	ptr_room2 = lemin->ptr_tab_link[1];
@@ -80,7 +80,7 @@ void link_room(t_lemin *lemin)
 	check_link_room(lemin, ptr_room2);
 }
 
-t_room *init_room(t_lemin *lemin, char *line, t_room **room)
+t_room	*init_room(t_lemin *lemin, char *line, t_room **room)
 {
 	t_room	*room_new;
 	char	**room_data;
